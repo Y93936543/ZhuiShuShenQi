@@ -81,6 +81,8 @@
     //通过书籍ID获取书籍详细信息
     [self getBookDetailByBookId];
     
+    [self setTitle:@"书籍详情"];
+    
     //设置 +追更新 按钮边框 颜色 圆角
     _readUpdate.layer.cornerRadius = 5;
     
