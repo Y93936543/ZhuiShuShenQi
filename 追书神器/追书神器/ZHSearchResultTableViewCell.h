@@ -22,8 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *bookSynopsis;
 //书籍人气
 @property (weak, nonatomic) IBOutlet UILabel *bookPopularity;
-//读者留存
-@property (weak, nonatomic) IBOutlet UILabel *readerRetain;
 
 @end
 

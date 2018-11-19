@@ -18,6 +18,7 @@
 #import "ZHReaderViewController.h"
 #import "MBProgressHUD.h"
 #import "ZHChapterModel.h"
+#import "ZHBookDetailViewController.h"
 
 @interface ZHBookViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -60,6 +61,10 @@
     [self initView];
     //加载数据
     [self loadData];
+    
+    [ZHConstans shareConstants].addBook = ^{
+        [self loadData];
+    };
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,7 +80,7 @@
  */
 - (void)initView{
     //判断是否有书籍
-    if (_localBookId == nil) {
+    if (_localBookId.count == 0) {
         //不隐藏为空视图
         self.isnilView.hidden = NO;
         self.BookListTablelView.hidden = YES;
@@ -105,6 +110,8 @@
             [self.bookArray arrayByAddingObject:bookDetail];
         }
         
+        [self.BookListTablelView reloadData];
+        
     }
     //设置回调（一旦你进入刷新状态，然后调用target的动作，即调用[self loadNewData]）
     self.BookListTablelView.mj_header.automaticallyChangeAlpha = YES;
@@ -118,6 +125,12 @@
  加载书籍，通过书籍Id获取书籍相关信息并保存到bookArray数组中，返回给UITableView进行展示出来
  */
 - (void)loadData{
+    
+    NSMutableArray *arrayID = [NSKeyedUnarchiver unarchiveObjectWithFile:BookIdPath];
+    if (!arrayID) {
+        arrayID = [NSMutableArray array];
+    }
+    
     //创建队列组 可以使多喝网络请求异步执行，执行完成之后再进行操作
     dispatch_group_t group = dispatch_group_create();
     
@@ -133,11 +146,11 @@
     //
     dispatch_group_async(group, queue, ^{
         //循环遍历保存到书籍Id，通过书籍Id查询书籍相关信息并显示到UITableView
-        for (int i = 0; i < self.localBookId.count; i++) {
+        for (int i = 0; i < arrayID.count; i++) {
             //创建 dispatch_semaphore_t 对象
             dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
             //TODO:执行网络请求获取书籍详情 通过书籍id
-            [manager GET:[bookInfoUrl stringByAppendingString:[self.localBookId objectAtIndex:i]] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            [manager GET:[bookInfoUrl stringByAppendingString:[arrayID objectAtIndex:i]] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 //将请求成功返回的结果转换成字典
                 NSDictionary *dic = responseObject;
                 //将字典转换为model
@@ -170,10 +183,10 @@
             if (self.isFirst) {
                 self.bookArray = book;
                 self.isFirst = false;
-                [self.BookListTablelView reloadData];
             }
-            self.bookList = book;
+            self.bookArray = book;
             [self.BookListTablelView.mj_header endRefreshing];
+            [self.BookListTablelView reloadData];
         });
     });
 }
@@ -277,7 +290,7 @@
 //    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
 
     //根据书籍id获取书籍源
-    [manager GET:[[Service stringByAppendingString:@"book-sources?view=summary&book="] stringByAppendingString:[[ZHConstans shareConstants] getBookId][indexPath.row]] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager GET:[[Service stringByAppendingString:@"book-sources?view=summary&book="] stringByAppendingString:[self.localBookId objectAtIndex:indexPath.row]] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"获取书籍源成功：%@",responseObject);
 
         //将获取的数据转换成字典数组

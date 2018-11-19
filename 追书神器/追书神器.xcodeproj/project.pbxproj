@@ -44,6 +44,8 @@
 		8D07E2D22193FF1700AC10F7 /* ZHCommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFCEA2621902D390003F7D1 /* ZHCommunityViewController.m */; };
 		8D07E2D521951C3800AC10F7 /* ZHBookSourceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D07E2D421951C3700AC10F7 /* ZHBookSourceModel.m */; };
 		8D07E2D821952EB500AC10F7 /* ZHChapterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D07E2D721952EB500AC10F7 /* ZHChapterModel.m */; };
+		8D299B3B21A27C840013CABB /* ZHThematicListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D299B3921A27C840013CABB /* ZHThematicListViewController.m */; };
+		8D299B3C21A27C840013CABB /* ZHThematicListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D299B3A21A27C840013CABB /* ZHThematicListViewController.xib */; };
 		8DB25567219AA8DB00261871 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DB25566219AA8DB00261871 /* Assets.xcassets */; };
 		8DB2556B219ABDDF00261871 /* ZHCoummunityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB25569219ABDDE00261871 /* ZHCoummunityTableViewCell.m */; };
 		8DB2556C219ABDDF00261871 /* ZHCoummunityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB2556A219ABDDE00261871 /* ZHCoummunityTableViewCell.xib */; };
@@ -146,6 +148,9 @@
 		8D07E2D421951C3700AC10F7 /* ZHBookSourceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHBookSourceModel.m; sourceTree = "<group>"; };
 		8D07E2D621952EB500AC10F7 /* ZHChapterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHChapterModel.h; sourceTree = "<group>"; };
 		8D07E2D721952EB500AC10F7 /* ZHChapterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHChapterModel.m; sourceTree = "<group>"; };
+		8D299B3821A27C840013CABB /* ZHThematicListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHThematicListViewController.h; sourceTree = "<group>"; };
+		8D299B3921A27C840013CABB /* ZHThematicListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHThematicListViewController.m; sourceTree = "<group>"; };
+		8D299B3A21A27C840013CABB /* ZHThematicListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZHThematicListViewController.xib; sourceTree = "<group>"; };
 		8DB25566219AA8DB00261871 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8DB25568219ABDDE00261871 /* ZHCoummunityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHCoummunityTableViewCell.h; sourceTree = "<group>"; };
 		8DB25569219ABDDE00261871 /* ZHCoummunityTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHCoummunityTableViewCell.m; sourceTree = "<group>"; };
@@ -404,6 +409,9 @@
 				8DB25585219D744500261871 /* ZHBookDetailViewController.h */,
 				8DB25586219D744600261871 /* ZHBookDetailViewController.m */,
 				8DB25587219D744600261871 /* ZHBookDetailViewController.xib */,
+				8D299B3821A27C840013CABB /* ZHThematicListViewController.h */,
+				8D299B3921A27C840013CABB /* ZHThematicListViewController.m */,
+				8D299B3A21A27C840013CABB /* ZHThematicListViewController.xib */,
 			);
 			path = "追书神器";
 			sourceTree = "<group>";
@@ -468,6 +476,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D299B3C21A27C840013CABB /* ZHThematicListViewController.xib in Resources */,
 				8D07E2A92192E9E600AC10F7 /* EReaderToolBar.xib in Resources */,
 				8DFCEA4021902D3B0003F7D1 /* ZHBookTableViewCell.xib in Resources */,
 				8D07E2A82192E9E600AC10F7 /* EReaderTopBar.xib in Resources */,
@@ -546,6 +555,7 @@
 				8D07E1C32192DDD000AC10F7 /* ZHReaderPager.m in Sources */,
 				8D07E2D821952EB500AC10F7 /* ZHChapterModel.m in Sources */,
 				8D07E28E2192E9B800AC10F7 /* TReaderManager.m in Sources */,
+				8D299B3B21A27C840013CABB /* ZHThematicListViewController.m in Sources */,
 				8DB25576219BCB2D00261871 /* LLSearchView.m in Sources */,
 				8DFCEA0E21902CDB0003F7D1 /* AppDelegate.m in Sources */,
 				8D07E2A72192E9E600AC10F7 /* EReaderFontBar.m in Sources */,

@@ -92,7 +92,8 @@
         if ([_localBookId[i] isEqualToString:_bookId]) {
             _isRead = YES;
             [self.readUpdate setTitle:@"- 不追了" forState:UIControlStateNormal];
-            [self.readUpdate setBackgroundColor:[UIColor grayColor]];
+            [self.readUpdate setBackgroundColor:[UIColor colorWithHex:0xC8C8C8]];
+            [_readUpdate setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             self.readUpdate.layer.borderWidth = 0;
         }
     }
@@ -174,15 +175,24 @@
         _readUpdate.layer.borderColor = [UIColor colorWithHex:0xA20000].CGColor;
         _readUpdate.layer.borderWidth = 1.0;
         [_readUpdate setTitle:@"+ 追更新" forState:UIControlStateNormal];
+        [_readUpdate setBackgroundColor:[UIColor whiteColor]];
+        [_readUpdate setTitleColor:[UIColor colorWithHex:0xA20000] forState:UIControlStateNormal];
         NSLog(@"保存书籍成功，书籍id：%@",_bookId);
+        _isRead = NO;
     }else{
         [self.localBookId insertObject:_bookId atIndex:0];
         [self.readUpdate setTitle:@"- 不追了" forState:UIControlStateNormal];
-        [self.readUpdate setBackgroundColor:[UIColor grayColor]];
-        self.readUpdate.layer.borderWidth = 0;
+        [_readUpdate setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_readUpdate setBackgroundColor:[UIColor colorWithHex:0xC8C8C8]];
+        _readUpdate.layer.borderWidth = 0;
         NSLog(@"移除书籍成功，书籍id：%@",_bookId);
+        _isRead = YES;
     }
     [NSKeyedArchiver archiveRootObject:self.localBookId toFile:BookIdPath];
+   
+    if ([ZHConstans shareConstants].addBook) {
+        [ZHConstans shareConstants].addBook();
+    }
 }
 
 //开始阅读按钮点击事件

@@ -48,6 +48,8 @@
             ZHBookDetailViewController *bookDeatilVC = [[ZHBookDetailViewController alloc] init];
             bookDeatilVC.bookId = bookId;
             [weakSelf.navigationController pushViewController:bookDeatilVC animated:YES];
+            //设置返回按钮文字，本界面设置，下一个界面显示
+            weakSelf.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
         };
     }
     return _resultView;

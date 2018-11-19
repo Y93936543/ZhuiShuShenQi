@@ -83,7 +83,7 @@
     
     cell.bookSynopsis.text = _dataSource[indexPath.row][@"shortIntro"];
     
-    cell.readerRetain.text = [NSString stringWithFormat:@"%.2f%%",[[NSString stringWithFormat:@"%@",_dataSource[indexPath.row][@"retentionRatio"]] floatValue]];
+//    cell.readerRetain.text = [NSString stringWithFormat:@"%.2f%%",[[NSString stringWithFormat:@"%@",_dataSource[indexPath.row][@"retentionRatio"]] floatValue]];
     
     cell.bookPopularity.text = [NSString stringWithFormat:@"%.2f万",[[NSString stringWithFormat:@"%@",_dataSource[indexPath.row][@"latelyFollower"]] floatValue]/10000];
 

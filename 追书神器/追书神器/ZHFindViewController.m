@@ -8,6 +8,7 @@
 
 #import "ZHFindViewController.h"
 #import "ZHConstans.h"
+#import "ZHThematicListViewController.h"
 
 @interface ZHFindViewController ()
 
@@ -78,6 +79,10 @@
 {
     NSLog(@"视图TAG：%ld",[sender.view tag]);
     //判断点击了哪个视图
+    ZHThematicListViewController *themeVC = [[ZHThematicListViewController alloc] init];
+    themeVC.hidesBottomBarWhenPushed = YES;
+    //设置返回按钮文字，本界面设置，下一个界面显示
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
     switch ([sender.view tag]) {
         case 101:
             //书城
@@ -89,7 +94,7 @@
             break;
         case 103:
             //主题书单
-            [[ZHConstans shareConstants] showToast:self.view showText:@"功能开发中，请耐心等待！"];
+            [self.navigationController pushViewController:themeVC animated:YES];
             break;
         case 104:
             //分类

@@ -21,6 +21,8 @@
 //书籍id保存地址
 #define BookIdPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"bookId.plist"]
 
+typedef void(^AddBook) (void);
+
 @interface ZHConstans : NSObject
 
 //服务器地址
@@ -34,6 +36,8 @@ extern NSString * const staticUrl;
 @property (nonatomic, strong) NSMutableArray<ZHBookSourceModel*> *bookSource;
 //书籍章节
 @property (nonatomic, strong) NSMutableArray<ZHBookSourceModel*> *bookChapter;
+
+@property (nonatomic, copy) AddBook addBook;
 
 /**
  *  工厂方法获得实列
