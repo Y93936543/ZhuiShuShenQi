@@ -46,10 +46,6 @@
     //控制进入软件时与刷新时获取数据
     self.isFirst = true;
     
-//    NSArray *array = @[@"55eef8b27445ad27755670b9",@"567d2cb9ee0e56bc713cb2c0"];
-//    [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"bookId"];
-//    [[NSUserDefaults standardUserDefaults] setValue:@"修真聊天群" forKey:@"55eef8b27445ad27755670b9+title"];
-//    [[NSUserDefaults standardUserDefaults] setValue:@"圣骑士的传说" forKey:@"55eef8b27445ad27755670b9+author"];
     if (!_localBookId) {
         _localBookId = [NSKeyedUnarchiver unarchiveObjectWithFile:BookIdPath];
         if (!_localBookId) {
@@ -157,11 +153,6 @@
                 ZHBookDetail *model = [ZHBookDetail bookListWithDict:dic];
                 //将model添加到book数组
                 [book addObject:model];
-                //保存书籍名称
-                [[ZHConstans shareConstants] saveBookInfo:[NSString stringWithFormat:@"%@+title",model._id] withValue:model.title];
-                [[ZHConstans shareConstants] saveBookInfo:[NSString stringWithFormat:@"%@+cover",model._id] withValue:model.cover];
-                [[ZHConstans shareConstants] saveBookInfo:[NSString stringWithFormat:@"%@+author",model._id] withValue:model.author];
-                [[ZHConstans shareConstants] saveBookInfo:[NSString stringWithFormat:@"%@+lastChapter",model._id] withValue:model.lastChapter];
                 
                 //请求成功发送请求成功信号量（+1）
                 dispatch_semaphore_signal(semaphore);
