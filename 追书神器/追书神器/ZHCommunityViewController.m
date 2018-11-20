@@ -12,6 +12,7 @@
 #import "ZHCoummunityTableViewCell.h"
 #import "UIColor+Addition.h"
 #import "SDWebImage/UIImageView+WebCache.h"
+#import "ZHBookCommunityViewController.h"
 
 @interface ZHCommunityViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -23,7 +24,7 @@
 //书籍社区列表
 @property (weak, nonatomic) IBOutlet UITableView *bookCoummunity;
 
-@property (nonatomic, strong) NSArray *bookCoummunityData;
+@property (nonatomic, strong) NSMutableArray *bookCoummunityData;
 
 //动态
 @property (weak, nonatomic) IBOutlet UIView *dybamicView;
@@ -44,7 +45,8 @@
     self.communityScrollView.mj_header.automaticallyChangeAlpha = YES;
     self.communityScrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         NSLog(@"刷新");
-        [self.communityScrollView.mj_header endRefreshing];
+        [self loadDate];
+        [self.bookCoummunity reloadData];
     }];
     
     //设置scrollView分页效果
@@ -62,10 +64,15 @@
     self.bookCoummunity.separatorColor = [UIColor colorWithHex:0xEFEFF4];
     [self setExtraCellLineHidden:self.bookCoummunity];
     
-    NSArray *bookId = [[NSUserDefaults standardUserDefaults] arrayForKey:@"bookId"];
-    if (bookId) {
-        _bookCoummunityData = bookId;
-    }
+    [self loadDate];
+    
+    __weak ZHCommunityViewController *weakSelf = self;
+    
+    [ZHConstans shareConstants].bookCommunity = ^{
+        [weakSelf loadDate];
+        [weakSelf.bookCoummunity reloadData];
+    };
+   
     
     //初始化公共板块
     [self initPublic];
@@ -74,6 +81,16 @@
     self.discussView.userInteractionEnabled = YES;
 }
 
+- (void) loadDate{
+    //获取BookId
+    NSMutableArray *arrayID = [NSKeyedUnarchiver unarchiveObjectWithFile:BookIdPath];
+    if (!arrayID) {
+        arrayID = [NSMutableArray array];
+    }
+    _bookCoummunityData = arrayID;
+}
+
+
 //设置pageControl的控制显示。通过scrollView的scrollViewDidScroll方法
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     //计算pagecontroll相应地页(滚动视图可以滚动的总宽度/单个滚动视图的宽度=滚动视图的页数)
@@ -81,19 +98,30 @@
     self.publicPageController.currentPage = currentPage;//将上述的滚动视图页数重新赋给当前视图页数,进行分页
 }
 
+//设置风分割线
 -(void)setExtraCellLineHidden: (UITableView *)tableView{
     UIView *view = [UIView new];
     [tableView setTableFooterView:view];
 }
 
+//点击cell事件方法
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [[ZHConstans shareConstants] showToast:self.view showText:@"功能开发中，请耐心等待！"];
+    ZHBookCommunityViewController *bookCommunityVC = [[ZHBookCommunityViewController alloc] init];
+    bookCommunityVC.bookId = [_bookCoummunityData objectAtIndex:indexPath.row];
+    bookCommunityVC.hidesBottomBarWhenPushed = YES;
+    bookCommunityVC.title = [[ZHConstans shareConstants] getBookInfo:[NSString stringWithFormat:@"%@+title",[_bookCoummunityData objectAtIndex:indexPath.row]]];
+    //设置返回按钮文字，本界面设置，下一个界面显示
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
+    [self.navigationController pushViewController:bookCommunityVC animated:YES];
 }
 
+
+//返回cell的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 60;
 }
 
+//返回UItableview的cell的数量
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _bookCoummunityData.count;
 }
@@ -120,9 +148,11 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     //设置书籍名称
-    cell.bookName.text = [[ZHConstans shareConstants] getBookInfo:[NSString stringWithFormat:@"%@+title",_bookCoummunityData[indexPath.row]]];
+    cell.bookName.text = [[ZHConstans shareConstants] getBookInfo:[NSString stringWithFormat:@"%@+title",[_bookCoummunityData objectAtIndex:indexPath.row]]];
     //设置书籍封面
-    [cell.bookCover sd_setImageWithURL:[NSURL URLWithString:[staticUrl stringByAppendingString:[[ZHConstans shareConstants] getBookInfo:[NSString stringWithFormat:@"%@+cover",_bookCoummunityData[indexPath.row]]]]]];
+    [cell.bookCover sd_setImageWithURL:[NSURL URLWithString:[staticUrl stringByAppendingString:[[ZHConstans shareConstants] getBookInfo:[NSString stringWithFormat:@"%@+cover",[_bookCoummunityData objectAtIndex:indexPath.row]]]]]];
+    
+    [self.communityScrollView.mj_header endRefreshing];
     
     return cell;
 }

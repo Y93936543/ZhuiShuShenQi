@@ -22,6 +22,10 @@ NSString * const staticUrl = @"http://statics.zhuishushenqi.com";
 
 static id _constants; //第一步，先定义一个全局静态id变量
 
+- (void)removeBookInfo:(NSString *)key{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:key];
+}
+
 /**
  *  获取保存的书籍id
  */

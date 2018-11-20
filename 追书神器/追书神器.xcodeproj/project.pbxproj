@@ -58,6 +58,8 @@
 		8DB25581219D0D9600261871 /* ZHSearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB2557F219D0D9600261871 /* ZHSearchResultTableViewCell.xib */; };
 		8DB25588219D744600261871 /* ZHBookDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB25586219D744600261871 /* ZHBookDetailViewController.m */; };
 		8DB25589219D744600261871 /* ZHBookDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB25587219D744600261871 /* ZHBookDetailViewController.xib */; };
+		8DC10A2A21A3CF0300D04D0A /* ZHBookCommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC10A2821A3CF0200D04D0A /* ZHBookCommunityViewController.m */; };
+		8DC10A2B21A3CF0300D04D0A /* ZHBookCommunityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DC10A2921A3CF0200D04D0A /* ZHBookCommunityViewController.xib */; };
 		8DFCEA0E21902CDB0003F7D1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFCEA0D21902CDB0003F7D1 /* AppDelegate.m */; };
 		8DFCEA1421902CDB0003F7D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DFCEA1221902CDB0003F7D1 /* Main.storyboard */; };
 		8DFCEA1921902CDC0003F7D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DFCEA1721902CDC0003F7D1 /* LaunchScreen.storyboard */; };
@@ -171,6 +173,9 @@
 		8DB25585219D744500261871 /* ZHBookDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHBookDetailViewController.h; sourceTree = "<group>"; };
 		8DB25586219D744600261871 /* ZHBookDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHBookDetailViewController.m; sourceTree = "<group>"; };
 		8DB25587219D744600261871 /* ZHBookDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZHBookDetailViewController.xib; sourceTree = "<group>"; };
+		8DC10A2721A3CF0200D04D0A /* ZHBookCommunityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHBookCommunityViewController.h; sourceTree = "<group>"; };
+		8DC10A2821A3CF0200D04D0A /* ZHBookCommunityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHBookCommunityViewController.m; sourceTree = "<group>"; };
+		8DC10A2921A3CF0200D04D0A /* ZHBookCommunityViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZHBookCommunityViewController.xib; sourceTree = "<group>"; };
 		8DFCEA0921902CDB0003F7D1 /* 追书神器.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "追书神器.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DFCEA0C21902CDB0003F7D1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8DFCEA0D21902CDB0003F7D1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -412,6 +417,9 @@
 				8D299B3821A27C840013CABB /* ZHThematicListViewController.h */,
 				8D299B3921A27C840013CABB /* ZHThematicListViewController.m */,
 				8D299B3A21A27C840013CABB /* ZHThematicListViewController.xib */,
+				8DC10A2721A3CF0200D04D0A /* ZHBookCommunityViewController.h */,
+				8DC10A2821A3CF0200D04D0A /* ZHBookCommunityViewController.m */,
+				8DC10A2921A3CF0200D04D0A /* ZHBookCommunityViewController.xib */,
 			);
 			path = "追书神器";
 			sourceTree = "<group>";
@@ -477,6 +485,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D299B3C21A27C840013CABB /* ZHThematicListViewController.xib in Resources */,
+				8DC10A2B21A3CF0300D04D0A /* ZHBookCommunityViewController.xib in Resources */,
 				8D07E2A92192E9E600AC10F7 /* EReaderToolBar.xib in Resources */,
 				8DFCEA4021902D3B0003F7D1 /* ZHBookTableViewCell.xib in Resources */,
 				8D07E2A82192E9E600AC10F7 /* EReaderTopBar.xib in Resources */,
@@ -558,6 +567,7 @@
 				8D299B3B21A27C840013CABB /* ZHThematicListViewController.m in Sources */,
 				8DB25576219BCB2D00261871 /* LLSearchView.m in Sources */,
 				8DFCEA0E21902CDB0003F7D1 /* AppDelegate.m in Sources */,
+				8DC10A2A21A3CF0300D04D0A /* ZHBookCommunityViewController.m in Sources */,
 				8D07E2A72192E9E600AC10F7 /* EReaderFontBar.m in Sources */,
 				8DB25580219D0D9600261871 /* ZHSearchResultTableViewCell.m in Sources */,
 				8DFCEA4621902D3B0003F7D1 /* ZHTabBarViewController.m in Sources */,

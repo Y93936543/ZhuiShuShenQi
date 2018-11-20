@@ -179,21 +179,32 @@
         [_readUpdate setTitle:@"+ 追更新" forState:UIControlStateNormal];
         [_readUpdate setBackgroundColor:[UIColor whiteColor]];
         [_readUpdate setTitleColor:[UIColor colorWithHex:0xA20000] forState:UIControlStateNormal];
-        NSLog(@"保存书籍成功，书籍id：%@",_bookId);
+        [[ZHConstans shareConstants] removeBookInfo:[NSString stringWithFormat:@"%@+title",_bookId]];
+        [[ZHConstans shareConstants] removeBookInfo:[NSString stringWithFormat:@"%@+cover",_bookId]];
+        [[ZHConstans shareConstants] removeBookInfo:[NSString stringWithFormat:@"%@+author",_bookId]];
+        [[ZHConstans shareConstants] removeBookInfo:[NSString stringWithFormat:@"%@+lastChapter",_bookId]];
         _isRead = NO;
+        NSLog(@"移除书籍成功，书籍id：%@",_bookId);
     }else{
         [self.localBookId insertObject:_bookId atIndex:0];
         [self.readUpdate setTitle:@"- 不追了" forState:UIControlStateNormal];
         [_readUpdate setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_readUpdate setBackgroundColor:[UIColor colorWithHex:0xC8C8C8]];
         _readUpdate.layer.borderWidth = 0;
-        NSLog(@"移除书籍成功，书籍id：%@",_bookId);
+        [[ZHConstans shareConstants] saveBookInfo:[NSString stringWithFormat:@"%@+title",_bookId] withValue:_dicBookDeatail[@"title"]];
+        [[ZHConstans shareConstants] saveBookInfo:[NSString stringWithFormat:@"%@+cover",_bookId] withValue:_dicBookDeatail[@"cover"]];
+        [[ZHConstans shareConstants] saveBookInfo:[NSString stringWithFormat:@"%@+author",_bookId] withValue:_dicBookDeatail[@"author"]];
+        [[ZHConstans shareConstants] saveBookInfo:[NSString stringWithFormat:@"%@+lastChapter",_bookId] withValue:_dicBookDeatail[@"lastChapter"]];
         _isRead = YES;
+        NSLog(@"保存书籍成功，书籍id：%@",_bookId);
     }
     [NSKeyedArchiver archiveRootObject:self.localBookId toFile:BookIdPath];
    
     if ([ZHConstans shareConstants].addBook) {
         [ZHConstans shareConstants].addBook();
+    }
+    if ([ZHConstans shareConstants].bookCommunity){
+        [ZHConstans shareConstants].bookCommunity();
     }
 }
 
