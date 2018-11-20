@@ -12,7 +12,7 @@
 #import "MBProgressHUD.h"
 #import "ZHConstans.h"
 #import "SDWebImage/UIImageView+WebCache.h"
-#import "ZHSearchResultTableViewCell.h"
+#import "ZHDiscussTableViewCell.h"
 
 @interface ZHBookCommunityViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -80,17 +80,27 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     //创建常量标识
-    static NSString *identifier = @"ZHSearchResultTableViewCell";
+    static NSString *identifier = @"ZHDiscussTableViewCell";
     //从重用队列查找可用的cell
-    ZHSearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    ZHDiscussTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     //判断如果没有可以重用的cell就创建
     if (cell == nil) {
         NSArray *nibArr = [[NSBundle mainBundle] loadNibNamed:identifier owner:self options:nil];
-        cell = (ZHSearchResultTableViewCell *) [nibArr firstObject];
+        cell = (ZHDiscussTableViewCell *) [nibArr firstObject];
         [cell setValue:identifier forKey:@"reuseIdentifier"];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    //设置用户头像
+    [cell.head sd_setImageWithURL:[NSURL URLWithString:[staticUrl stringByAppendingString:[NSString stringWithFormat:@"%@",((NSArray*)_dicDiscuss)[indexPath.row][@"author"][@"avatar"]]]]];
+    //设置用户昵称和等级
+    cell.userNameClass.text = [[[NSString stringWithFormat:@"%@",((NSArray*)_dicDiscuss)[indexPath.row][@"author"][@"nickname"]] stringByAppendingString:@" lv"] stringByAppendingString:[NSString stringWithFormat:@"%@",((NSArray*)_dicDiscuss)[indexPath.row][@"author"][@"lv"]]];
+    //设置讨论内容
+    cell.content.text = [NSString stringWithFormat:@"%@",((NSArray*)_dicDiscuss)[indexPath.row][@"title"]];
+    //设置评论数量
+    cell.discussNumber.text = [NSString stringWithFormat:@"%d",[((NSArray*)_dicDiscuss)[indexPath.row][@"commentCount"] intValue]];
+    //设置点赞数量
+    cell.likeNumber.text = [NSString stringWithFormat:@"%d",[((NSArray*)_dicDiscuss)[indexPath.row][@"likeCount"] intValue]];;
     return cell;
 }
 
