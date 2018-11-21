@@ -14,6 +14,8 @@
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "ZHChapterModel.h"
 #import "ZHReaderViewController.h"
+#import "YYLabel.h"
+#import "ZHBookCommunityViewController.h"
 
 @interface ZHBookDetailViewController ()
 
@@ -41,11 +43,36 @@
 @property (weak, nonatomic) IBOutlet UILabel *readerRetain;
 //更新字数/天
 @property (weak, nonatomic) IBOutlet UILabel *updateWordDay;
-//书籍标签视图 动态添加标签
-@property (weak, nonatomic) IBOutlet UIView *labelView;
-//书籍简介 长
-@property (weak, nonatomic) IBOutlet UILabel *longIntro;
 
+//热门评论
+//用户头像
+@property (weak, nonatomic) IBOutlet UIImageView *userHead1;
+@property (weak, nonatomic) IBOutlet UIImageView *userHead2;
+//用户昵称
+@property (weak, nonatomic) IBOutlet UILabel *userName1;
+@property (weak, nonatomic) IBOutlet UILabel *userName2;
+//评论标题
+@property (weak, nonatomic) IBOutlet UILabel *plTitle1;
+@property (weak, nonatomic) IBOutlet UILabel *plTitle2;
+//评论时间
+@property (weak, nonatomic) IBOutlet UILabel *commTime1;
+@property (weak, nonatomic) IBOutlet UILabel *commTime2;
+//赞数量
+@property (weak, nonatomic) IBOutlet UILabel *likeNumber1;
+@property (weak, nonatomic) IBOutlet UILabel *likeNumber2;
+//更多
+@property (weak, nonatomic) IBOutlet UILabel *moreBtn;
+//社区视图
+@property (weak, nonatomic) IBOutlet UIView *communityView;
+//热门评论视图
+@property (weak, nonatomic) IBOutlet UIView *hotCommView1;
+@property (weak, nonatomic) IBOutlet UIView *hotCommView2;
+
+//标签1、2、3、4
+@property (weak, nonatomic) IBOutlet UILabel *label1;
+@property (weak, nonatomic) IBOutlet UILabel *label2;
+@property (weak, nonatomic) IBOutlet UILabel *label3;
+@property (weak, nonatomic) IBOutlet UILabel *label4;
 
 //书籍详细信息字典
 @property (nonatomic, strong) NSDictionary *dicBookDeatail;
@@ -55,6 +82,8 @@
 @property (nonatomic, strong) NSMutableArray *localBookId;
 //判断该本书籍是否在追书
 @property (nonatomic, assign) BOOL isRead;
+//书籍简介 长
+@property (nonatomic, strong) YYLabel *yyLabel;
 
 @end
 
@@ -71,6 +100,14 @@
     //执行网络加载，等待提示框
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
+    _yyLabel = [YYLabel new];
+    _yyLabel.frame = CGRectMake(25, 317, WidthScale * 335, HeightScale * 83);
+    _yyLabel.font = [UIFont systemFontOfSize:14];
+    _yyLabel.textColor = [UIColor colorWithHex:0x696969];
+    
+    _yyLabel.numberOfLines = 6;
+    [self.bookDetailScrollView addSubview:_yyLabel];
+    
     if (!_localBookId) {
         _localBookId = [NSKeyedUnarchiver unarchiveObjectWithFile:BookIdPath];
         if (!_localBookId) {
@@ -79,7 +116,9 @@
     }
     
     //通过书籍ID获取书籍详细信息
-    [self getBookDetailByBookId];
+    [self getBookDetailByBookId:0];
+    //通过书籍ID获取书籍热门评论
+    [self getBookDetailByBookId:1];
     
     [self setTitle:@"书籍详情"];
     
@@ -103,10 +142,22 @@
     //设置开始阅读按钮圆角
     _startRead.layer.cornerRadius = 5;
     
-    //隐藏scrollView的滚动条
-    self.bookDetailScrollView.showsHorizontalScrollIndicator = NO;
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(communityViewPress:)];
+    _communityView.userInteractionEnabled = YES;
+    [_communityView addGestureRecognizer:gesture];
 }
-- (void) getBookDetailByBookId{
+
+-(void) communityViewPress:(UITapGestureRecognizer*) sender{
+    ZHBookCommunityViewController *bookCommunityVC = [[ZHBookCommunityViewController alloc] init];
+    bookCommunityVC.bookId = _bookId;
+    bookCommunityVC.title = _dicBookDeatail[@"title"];
+    //设置返回按钮文字，本界面设置，下一个界面显示
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
+    [self.navigationController pushViewController:bookCommunityVC animated:YES];
+}
+
+
+- (void) getBookDetailByBookId:(int) i{
     //创建网络请求管理器
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     //设置请求类型
@@ -114,15 +165,60 @@
     
     __weak ZHBookDetailViewController *weakSelf = self;
     
-    [manager GET:[Service stringByAppendingString:[NSString stringWithFormat:@"book-info/%@",_bookId]] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"获取书籍详细信息成功：%@",responseObject);
-        //保存书籍详细信息
-        weakSelf.dicBookDeatail = responseObject;
-        [self updateView];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"获取书籍详细信息失败：%@",error);
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-    }];
+    if (i == 0) {
+        [manager GET:[Service stringByAppendingString:[NSString stringWithFormat:@"book-info/%@",_bookId]] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSLog(@"获取书籍详细信息成功：%@",responseObject);
+            //保存书籍详细信息
+            weakSelf.dicBookDeatail = responseObject;
+            [self updateView];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"获取书籍详细信息失败：%@",error);
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }];
+    }else{
+        [manager GET:[NSString stringWithFormat:@"http://api.zhuishushenqi.com/post/review/by-book?book=%@&sort=comment-count&start=0&limit=2",_bookId] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSLog(@"获取书籍热门评论成功：%@",responseObject);
+            [weakSelf.userHead1 sd_setImageWithURL:[NSURL URLWithString:[staticUrl stringByAppendingString:responseObject[@"reviews"][0][@"author"][@"avatar"]]]];
+            [weakSelf.userHead2 sd_setImageWithURL:[NSURL URLWithString:[staticUrl stringByAppendingString:responseObject[@"reviews"][1][@"author"][@"avatar"]]]];
+            weakSelf.userName1.text = responseObject[@"reviews"][0][@"author"][@"nickname"];
+            weakSelf.userName2.text = responseObject[@"reviews"][1][@"author"][@"nickname"];
+            weakSelf.plTitle1.text = responseObject[@"reviews"][0][@"title"];
+            weakSelf.plTitle2.text = responseObject[@"reviews"][1][@"title"];
+            weakSelf.likeNumber1.text = [NSString stringWithFormat:@"%d",[responseObject[@"reviews"][0][@"likeCount"] intValue]];
+            weakSelf.likeNumber2.text = [NSString stringWithFormat:@"%d",[responseObject[@"reviews"][1][@"likeCount"] intValue]];
+            
+            int x = 0;
+            
+            for (int i = 0; i < [responseObject[@"reviews"][0][@"rating"] intValue]; i++) {
+                x = 70 + (i * 15);
+                UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Star"]];
+                imageView.frame = CGRectMake(x, 50, 10, 10);
+                [self.hotCommView1 addSubview:imageView];
+            }
+            for (int j = 0; j < (5 - [responseObject[@"reviews"][0][@"rating"] intValue]); j++) {
+                UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Star_nil"]];
+                imageView.frame = CGRectMake(x, 50, 10, 10);
+                [self.hotCommView1 addSubview:imageView];
+            }
+            
+            for (int i = 0; i < [responseObject[@"reviews"][0][@"rating"] intValue]; i++) {
+                x = 70 + (i * 15);
+                UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Star"]];
+                imageView.frame = CGRectMake(x, 50, 10, 10);
+                [self.hotCommView2 addSubview:imageView];
+            }
+            for (int j = 0; j < (5 - [responseObject[@"reviews"][0][@"rating"] intValue]); j++) {
+                UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Star_nil"]];
+                imageView.frame = CGRectMake(x, 50, 10, 10);
+                [self.hotCommView2 addSubview:imageView];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"获取书籍热门评论失败：%@",error);
+        }];
+    }
+    
+    
 
 }
 
@@ -144,21 +240,35 @@
     //设置书籍每天更新字数
     self.updateWordDay.text = [NSString stringWithFormat:@"%@",_dicBookDeatail[@"serializeWordCount"]];
     
-    //设置书籍标签
-    int tags;
-    NSArray *array = _dicBookDeatail[@"tags"];
-    if (array.count >= 4) {
-        tags = 4;
-    }else{
-        tags = (int)array.count ;
-    }
-    for (int i = 0; i < tags; i++) {
-        //TODO:创建标签视图添加到视图中
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(20, 15, 50, 30)];
-        view.backgroundColor = [UIColor orangeColor];
-        [self.labelView addSubview:view];
-    }
+    self.yyLabel.attributedText = [self getAttributedStringWithString:[NSString stringWithFormat:@"%@",_dicBookDeatail[@"longIntro"]] lineSpace:3];
     
+    //设置书籍标签
+    NSArray *array = _dicBookDeatail[@"tags"];
+    
+    //TODO:创建标签视图添加到视图中
+    _label1.layer.masksToBounds = YES;
+    _label1.layer.cornerRadius = 2;
+    _label2.layer.masksToBounds = YES;
+    _label2.layer.cornerRadius = 2;
+    _label3.layer.masksToBounds = YES;
+    _label3.layer.cornerRadius = 2;
+    _label4.layer.masksToBounds = YES;
+    _label4.layer.cornerRadius = 2;
+    if (array.count > 3) {
+        _label1.text = array[0];
+        _label2.text = array[1];
+        _label3.text = array[2];
+        _label4.text = array[3];
+    }else if(array.count > 2){
+        _label1.text = array[0];
+        _label2.text = array[1];
+        _label3.text = array[2];
+    }else if(array.count > 1){
+        _label1.text = array[0];
+        _label2.text = array[1];
+    }else if(array.count > 0){
+        _label1.text = array[0];
+    }
     
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self.waitView removeFromSuperview];
@@ -270,5 +380,17 @@
     }];
 }
 
+
+
+
+//调整行间距
+-(NSAttributedString *)getAttributedStringWithString:(NSString *)string lineSpace:(CGFloat)lineSpace {
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = lineSpace; // 调整行间距
+    NSRange range = NSMakeRange(0, [string length]);
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:range];
+    return attributedString;
+}
 
 @end

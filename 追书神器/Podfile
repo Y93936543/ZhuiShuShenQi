@@ -10,5 +10,6 @@ pod 'AFNetworking'
 pod 'MJRefresh'
 pod 'SDWebImage', '3.8'
 pod 'MBProgressHUD'
+pod 'YYText', '~> 1.0.7'
 
 end
