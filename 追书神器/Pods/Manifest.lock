@@ -19,12 +19,14 @@ PODS:
   - SDWebImage (3.8.0):
     - SDWebImage/Core (= 3.8.0)
   - SDWebImage/Core (3.8.0)
+  - YYText (1.0.7)
 
 DEPENDENCIES:
   - AFNetworking
   - MBProgressHUD
   - MJRefresh
   - SDWebImage (= 3.8)
+  - YYText (~> 1.0.7)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -32,13 +34,15 @@ SPEC REPOS:
     - MBProgressHUD
     - MJRefresh
     - SDWebImage
+    - YYText
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MJRefresh: 9af70f5f9327a2cf87f0fb5929f35fcc2fa638ea
   SDWebImage: 7d9fe229266696de91eadf840c77ca15efd4bbd2
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 71dce894eaf60d960756ef5aa206dcfc02930b5a
+PODFILE CHECKSUM: 52a9ced42bb8103e0af01b72c8486663a73b1b8c
 
 COCOAPODS: 1.5.3
