@@ -144,25 +144,20 @@
     //设置书籍每天更新字数
     self.updateWordDay.text = [NSString stringWithFormat:@"%@",_dicBookDeatail[@"serializeWordCount"]];
     
-    // 3.GCD
-    dispatch_async(dispatch_get_main_queue(), ^{
-        // UI更新代码
-        //设置书籍标签
-        int tags;
-        NSArray *array = _dicBookDeatail[@"tags"];
-        if (array.count >= 4) {
-            tags = 4;
-        }else{
-            tags = (int)array.count ;
-        }
-        for (int i = 0; i < tags; i++) {
-            //TODO:创建标签视图添加到视图中
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(20, 15, 50, 30)];
-            view.backgroundColor = [UIColor orangeColor];
-            [self.labelView addSubview:view];
-        }
-    });
-    
+    //设置书籍标签
+    int tags;
+    NSArray *array = _dicBookDeatail[@"tags"];
+    if (array.count >= 4) {
+        tags = 4;
+    }else{
+        tags = (int)array.count ;
+    }
+    for (int i = 0; i < tags; i++) {
+        //TODO:创建标签视图添加到视图中
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(20, 15, 50, 30)];
+        view.backgroundColor = [UIColor orangeColor];
+        [self.labelView addSubview:view];
+    }
     
     
     [MBProgressHUD hideHUDForView:self.view animated:YES];
