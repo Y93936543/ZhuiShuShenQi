@@ -83,9 +83,12 @@
     
     cell.bookSynopsis.text = _dataSource[indexPath.row][@"shortIntro"];
     
-//    cell.readerRetain.text = [NSString stringWithFormat:@"%.2f%%",[[NSString stringWithFormat:@"%@",_dataSource[indexPath.row][@"retentionRatio"]] floatValue]];
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%.2f万人气 | %.2f%%读者留存",[_dataSource[indexPath.row][@"latelyFollower"] floatValue]/10000, [_dataSource[indexPath.row][@"retentionRatio"] floatValue]]];
     
-    cell.bookPopularity.text = [NSString stringWithFormat:@"%.2f万",[[NSString stringWithFormat:@"%@",_dataSource[indexPath.row][@"latelyFollower"]] floatValue]/10000];
+    [str addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, 5)];
+    [str addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(9, 7)];
+    
+    cell.bookPopularity.attributedText = str;
 
     return cell;
 }

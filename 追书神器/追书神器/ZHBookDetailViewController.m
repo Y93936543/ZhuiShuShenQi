@@ -129,7 +129,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     _yyLabel = [YYLabel new];
-    _yyLabel.frame = CGRectMake(25, 317, WidthScale * 335, HeightScale * 83);
+    _yyLabel.frame = CGRectMake(25, 317, WidthScale * 335, 83);
     _yyLabel.font = [UIFont systemFontOfSize:14];
     _yyLabel.textColor = [UIColor colorWithHex:0x696969];
     
@@ -326,14 +326,14 @@
             }
             
             YYLabel *label = [YYLabel new];
-            label.frame = CGRectMake(70, 60, WidthScale * 290, HeightScale * 50);
+            label.frame = CGRectMake(70, 60, WidthScale * 290, 50);
             label.font = [UIFont systemFontOfSize:14];
             label.attributedText = [self getAttributedStringWithString:[NSString stringWithFormat:@"%@",responseObject[@"reviews"][0][@"content"]] lineSpace:3];
             label.numberOfLines = 2;
             [weakSelf.hotCommView1 addSubview:label];
             
             YYLabel *label1 = [YYLabel new];
-            label1.frame = CGRectMake(70, 60, WidthScale * 290, HeightScale * 50);
+            label1.frame = CGRectMake(70, 60, WidthScale * 290, 50);
             label1.font = [UIFont systemFontOfSize:14];
             label1.attributedText = [self getAttributedStringWithString:[NSString stringWithFormat:@"%@",responseObject[@"reviews"][1][@"content"]] lineSpace:3];
             label1.numberOfLines = 2;

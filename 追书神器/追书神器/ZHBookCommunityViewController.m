@@ -26,6 +26,8 @@
 @property (nonatomic, strong) NSMutableArray *dicDiscuss;
 
 @property (nonatomic, assign) int i;
+//遮罩层视图
+@property (nonatomic, strong) UIView *waitView;
 
 @end
 
@@ -34,6 +36,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    //页面展示之前进行等待提示框 和 网络请求
+    self.waitView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+    self.waitView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.waitView];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     _dicDiscuss = [NSMutableArray array];
     
@@ -93,6 +102,8 @@
         [weakSelf.discussTableView reloadData];
         [weakSelf.discussTableView.mj_footer endRefreshing];
         [weakSelf.discussTableView.mj_header endRefreshing];
+        [weakSelf.waitView removeFromSuperview];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"获取书籍讨论失败：%@",error);
     }];

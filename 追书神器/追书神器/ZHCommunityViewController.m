@@ -169,11 +169,11 @@
 
 - (void) initPublic
 {
-    UIView *dynamicView = [[UIView alloc] initWithFrame:CGRectMake(WidthScale * 35, HeightScale * 20, WidthScale * 43.75, HeightScale * 43.75)];
+    UIView *dynamicView = [[UIView alloc] initWithFrame:CGRectMake(WidthScale * 35, 20, 43.75, 43.75)];
     UIImageView *dynamicImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dynamic"]];
-    dynamicImageView.frame = CGRectMake(WidthScale * 10, 0, WidthScale * 30, HeightScale * 30);
+    dynamicImageView.frame = CGRectMake(10, 0, 30, 30);
     [dynamicView addSubview:dynamicImageView];
-    UILabel *dynamicLabel = [[UILabel alloc] initWithFrame:CGRectMake(WidthScale * 15, HeightScale * 30, WidthScale * 38, HeightScale * 38)];
+    UILabel *dynamicLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 30, 38, 38)];
     dynamicLabel.font = [UIFont systemFontOfSize:10];
     dynamicLabel.text = @"动态";
     [dynamicView addSubview:dynamicLabel];
@@ -181,101 +181,101 @@
     [dynamicView addGestureRecognizer:tapGestrue];
     [self.publicScrollView addSubview:dynamicView];
 
-    UIView *discussView = [[UIView alloc] initWithFrame:CGRectMake(WidthScale * 118.75, HeightScale * 20, WidthScale * 43.75, HeightScale * 43.75)];
+    UIView *discussView = [[UIView alloc] initWithFrame:CGRectMake(WidthScale * 118.75, 20, 43.75, 43.75)];
     UIImageView *discussImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"discuss"]];
-    discussImageView.frame = CGRectMake(WidthScale * 10, 0, WidthScale * 30, HeightScale * 30);
+    discussImageView.frame = CGRectMake(10, 0, 30, 30);
     [discussView addSubview:discussImageView];
-    UILabel *discussLabel = [[UILabel alloc] initWithFrame:CGRectMake(WidthScale * 5, HeightScale * 33.75, WidthScale * 45, HeightScale * 30)];
+    UILabel *discussLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 33.75, 45, 30)];
     discussLabel.font = [UIFont systemFontOfSize:10];
     discussLabel.text = @"综合讨论";
     [discussView addSubview:discussLabel];
     [self.publicScrollView addSubview:discussView];
 
-    UIView *cooperationView = [[UIView alloc] initWithFrame:CGRectMake(WidthScale * 202.5, HeightScale * 20, WidthScale * 43.75, HeightScale * 43.75)];
+    UIView *cooperationView = [[UIView alloc] initWithFrame:CGRectMake(WidthScale * 202.5, 20, 43.75, 43.75)];
     UIImageView *cooperationImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cooperation"]];
-    cooperationImageView.frame = CGRectMake(WidthScale * 10, 0, WidthScale * 40, HeightScale * 30);
+    cooperationImageView.frame = CGRectMake(10, 0, 40, 30);
     [cooperationView addSubview:cooperationImageView];
-    UILabel *cooperationLabel = [[UILabel alloc] initWithFrame:CGRectMake(WidthScale * 5, HeightScale * 33.75, WidthScale * 45, HeightScale * 30)];
+    UILabel *cooperationLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 33.75, 45, 30)];
     cooperationLabel.font = [UIFont systemFontOfSize:10];
     cooperationLabel.text = @"书荒互助";
     [cooperationView addSubview:cooperationLabel];
     [self.publicScrollView addSubview:cooperationView];
 
-    UIView *reviewView = [[UIView alloc] initWithFrame:CGRectMake(WidthScale * 286.25, HeightScale * 20, WidthScale * 43.75, HeightScale * 43.75)];
+    UIView *reviewView = [[UIView alloc] initWithFrame:CGRectMake(WidthScale * 286.25, 20, 43.75, 43.75)];
     UIImageView *reviewImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"review"]];
-    reviewImageView.frame = CGRectMake(WidthScale * 10, 0, WidthScale * 30, HeightScale * 30);
+    reviewImageView.frame = CGRectMake(10, 0, 30, 30);
     [reviewView addSubview:reviewImageView];
-    UILabel *reviewLabel = [[UILabel alloc] initWithFrame:CGRectMake(WidthScale * 5, HeightScale * 33.75, WidthScale * 45, HeightScale * 30)];
+    UILabel *reviewLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 33.75, 45, 30)];
     reviewLabel.font = [UIFont systemFontOfSize:10];
     reviewLabel.text = @"精彩书评";
     [reviewView addSubview:reviewLabel];
     [self.publicScrollView addSubview:reviewView];
 
-    UIView *welfareView = [[UIView alloc] initWithFrame:CGRectMake(WidthScale * 35, HeightScale * 103.75, WidthScale * 43.75, HeightScale * 43.75)];
+    UIView *welfareView = [[UIView alloc] initWithFrame:CGRectMake(WidthScale * 35, 103.75, 43.75, 43.75)];
     UIImageView *welfareImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"welfare"]];
-    welfareImageView.frame = CGRectMake(WidthScale * 10, 0, WidthScale * 30, HeightScale * 30);
+    welfareImageView.frame = CGRectMake(10, 0, 30, 30);
     [welfareView addSubview:welfareImageView];
-    UILabel *welfareLabel = [[UILabel alloc] initWithFrame:CGRectMake(WidthScale * 5, HeightScale * 33.75, WidthScale * 45, HeightScale * 30)];
+    UILabel *welfareLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 33.75, 45, 30)];
     welfareLabel.font = [UIFont systemFontOfSize:10];
     welfareLabel.text = @"活动福利";
     [welfareView addSubview:welfareLabel];
     [self.publicScrollView addSubview:welfareView];
 
-    UIView *writingView = [[UIView alloc] initWithFrame:CGRectMake(WidthScale * 118.75, HeightScale * 103.75, WidthScale * 43.75, HeightScale * 43.75)];
+    UIView *writingView = [[UIView alloc] initWithFrame:CGRectMake(WidthScale * 118.75, 103.75, 43.75, 43.75)];
     UIImageView *writingImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"writing"]];
-    writingImageView.frame = CGRectMake(WidthScale * 10, 0, WidthScale * 33, HeightScale * 33);
+    writingImageView.frame = CGRectMake(10, 0, 33, 33);
     [writingView addSubview:writingImageView];
-    UILabel *writingLabel = [[UILabel alloc] initWithFrame:CGRectMake(WidthScale * 7, HeightScale * 33.75, WidthScale * 45, HeightScale * 30)];
+    UILabel *writingLabel = [[UILabel alloc] initWithFrame:CGRectMake(7, 33.75, 45, 30)];
     writingLabel.font = [UIFont systemFontOfSize:10];
     writingLabel.text = @"原创写作";
     [writingView addSubview:writingLabel];
     [self.publicScrollView addSubview:writingView];
 
-    UIView *heartView = [[UIView alloc] initWithFrame:CGRectMake(WidthScale * 202.5, HeightScale * 103.75, WidthScale * 43.75, HeightScale * 43.75)];
+    UIView *heartView = [[UIView alloc] initWithFrame:CGRectMake(WidthScale * 202.5, 103.75, 43.75, 43.75)];
     UIImageView *heartImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"heart"]];
-    heartImageView.frame = CGRectMake(WidthScale * 10, 0, WidthScale * 33, HeightScale * 33);
+    heartImageView.frame = CGRectMake(10, 0, 33, 33);
     [heartView addSubview:heartImageView];
-    UILabel *heartLabel = [[UILabel alloc] initWithFrame:CGRectMake(WidthScale * 7, HeightScale * 33.75, WidthScale * 45, HeightScale * 30)];
+    UILabel *heartLabel = [[UILabel alloc] initWithFrame:CGRectMake(7, 33.75, 45, 30)];
     heartLabel.font = [UIFont systemFontOfSize:10];
     heartLabel.text = @"女生密语";
     [heartView addSubview:heartLabel];
     [self.publicScrollView addSubview:heartView];
 
-    UIView *gameView = [[UIView alloc] initWithFrame:CGRectMake(WidthScale * 286.25, HeightScale * 103.75, WidthScale * 43.75, HeightScale * 43.75)];
+    UIView *gameView = [[UIView alloc] initWithFrame:CGRectMake(WidthScale * 286.25, 103.75,43.75, 43.75)];
     UIImageView *gameImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"game"]];
-    gameImageView.frame = CGRectMake(WidthScale * 10, 0, WidthScale * 33, HeightScale * 33);
+    gameImageView.frame = CGRectMake(10, 0, 33, 33);
     [gameView addSubview:gameImageView];
-    UILabel *gameLabel = [[UILabel alloc] initWithFrame:CGRectMake(WidthScale * 7, HeightScale * 33.75, WidthScale * 45, HeightScale * 30)];
+    UILabel *gameLabel = [[UILabel alloc] initWithFrame:CGRectMake(7, 33.75, 45, 30)];
     gameLabel.font = [UIFont systemFontOfSize:10];
     gameLabel.text = @"游戏竞技";
     [gameView addSubview:gameLabel];
     [self.publicScrollView addSubview:gameView];
 
-    UIView *monsterView = [[UIView alloc] initWithFrame:CGRectMake(WidthScale * 410, HeightScale * 20, WidthScale * 43.75, HeightScale * 43.75)];
+    UIView *monsterView = [[UIView alloc] initWithFrame:CGRectMake(WidthScale * 410, 20, 43.75, 43.75)];
     UIImageView *monsterImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"monster"]];
-    monsterImageView.frame = CGRectMake(WidthScale * 10, 0, WidthScale * 36, HeightScale * 36);
+    monsterImageView.frame = CGRectMake(10, 0, 36, 36);
     [monsterView addSubview:monsterImageView];
-    UILabel *monsterLabel = [[UILabel alloc] initWithFrame:CGRectMake(WidthScale * 14, HeightScale * 33.75, WidthScale * 45, HeightScale * 30)];
+    UILabel *monsterLabel = [[UILabel alloc] initWithFrame:CGRectMake(14, 33.75, 45, 30)];
     monsterLabel.font = [UIFont systemFontOfSize:10];
     monsterLabel.text = @"二次元";
     [monsterView addSubview:monsterLabel];
     [self.publicScrollView addSubview:monsterView];
 
-    UIView *medalView = [[UIView alloc] initWithFrame:CGRectMake(WidthScale * 493.75, HeightScale * 20, WidthScale * 43.75, HeightScale * 43.75)];
+    UIView *medalView = [[UIView alloc] initWithFrame:CGRectMake(WidthScale * 493.75, 20, 43.75, 43.75)];
     UIImageView *medalImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"medal"]];
-    medalImageView.frame = CGRectMake(WidthScale * 10, 0, WidthScale * 30, HeightScale * 30);
+    medalImageView.frame = CGRectMake(10, 0, 30, 30);
     [medalView addSubview:medalImageView];
-    UILabel *medalLabel = [[UILabel alloc] initWithFrame:CGRectMake(WidthScale * 5, HeightScale * 33.75, WidthScale * 45, HeightScale * 30)];
+    UILabel *medalLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 33.75, 45, 30)];
     medalLabel.font = [UIFont systemFontOfSize:10];
     medalLabel.text = @"网文江湖";
     [medalView addSubview:medalLabel];
     [self.publicScrollView addSubview:medalView];
 
-    UIView *historyView = [[UIView alloc] initWithFrame:CGRectMake(WidthScale * 577.5, HeightScale * 20, WidthScale * 43.75, HeightScale * 43.75)];
+    UIView *historyView = [[UIView alloc] initWithFrame:CGRectMake(WidthScale * 577.5, 20, 43.75, 43.75)];
     UIImageView *historyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"history"]];
-    historyImageView.frame = CGRectMake(WidthScale * 10, 0, WidthScale * 36, HeightScale * 36);
+    historyImageView.frame = CGRectMake(10, 0, 36, 36);
     [historyView addSubview:historyImageView];
-    UILabel *historyLabel = [[UILabel alloc] initWithFrame:CGRectMake(WidthScale * 7, HeightScale * 34.75, WidthScale * 45, HeightScale * 30)];
+    UILabel *historyLabel = [[UILabel alloc] initWithFrame:CGRectMake(7, 34.75,  45,  30)];
     historyLabel.font = [UIFont systemFontOfSize:10];
     historyLabel.text = @"大话历史";
     [historyView addSubview:historyLabel];
