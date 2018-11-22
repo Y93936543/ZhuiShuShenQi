@@ -196,6 +196,7 @@
                 [self.hotCommView1 addSubview:imageView];
             }
             for (int j = 0; j < (5 - [responseObject[@"reviews"][0][@"rating"] intValue]); j++) {
+                x = x + ((i + 1) * 15);
                 UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Star_nil"]];
                 imageView.frame = CGRectMake(x, 50, 10, 10);
                 [self.hotCommView1 addSubview:imageView];
@@ -208,6 +209,7 @@
                 [self.hotCommView2 addSubview:imageView];
             }
             for (int j = 0; j < (5 - [responseObject[@"reviews"][0][@"rating"] intValue]); j++) {
+                x = x + ((i + 1) * 15);
                 UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Star_nil"]];
                 imageView.frame = CGRectMake(x, 50, 10, 10);
                 [self.hotCommView2 addSubview:imageView];
