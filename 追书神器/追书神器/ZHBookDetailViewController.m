@@ -16,6 +16,7 @@
 #import "ZHReaderViewController.h"
 #import "YYLabel.h"
 #import "ZHBookCommunityViewController.h"
+#import "ZHInterestViewController.h"
 
 @interface ZHBookDetailViewController ()
 
@@ -67,6 +68,31 @@
 //热门评论视图
 @property (weak, nonatomic) IBOutlet UIView *hotCommView1;
 @property (weak, nonatomic) IBOutlet UIView *hotCommView2;
+//书籍社区
+@property (weak, nonatomic) IBOutlet UILabel *bookNameCommunity;
+//帖子数量
+@property (weak, nonatomic) IBOutlet UILabel *tzNumber;
+//你可能感兴趣
+//视图
+@property (weak, nonatomic) IBOutlet UIView *view1;
+@property (weak, nonatomic) IBOutlet UIView *view2;
+@property (weak, nonatomic) IBOutlet UIView *view3;
+@property (weak, nonatomic) IBOutlet UIView *view4;
+//图片
+@property (weak, nonatomic) IBOutlet UIImageView *imageView1;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView2;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView3;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView4;
+//标签 书籍名称
+@property (weak, nonatomic) IBOutlet UILabel *label11;
+@property (weak, nonatomic) IBOutlet UILabel *label22;
+@property (weak, nonatomic) IBOutlet UILabel *label33;
+@property (weak, nonatomic) IBOutlet UILabel *label44;
+//更多按钮
+@property (weak, nonatomic) IBOutlet UILabel *moreBtn_xq;
+
+//图书版权
+@property (weak, nonatomic) IBOutlet UILabel *bookCopyright;
 
 //标签1、2、3、4
 @property (weak, nonatomic) IBOutlet UILabel *label1;
@@ -84,6 +110,8 @@
 @property (nonatomic, assign) BOOL isRead;
 //书籍简介 长
 @property (nonatomic, strong) YYLabel *yyLabel;
+//可能感兴趣的书籍都信息
+@property (nonatomic, strong) NSMutableArray *interestBookInfo;
 
 @end
 
@@ -119,6 +147,10 @@
     [self getBookDetailByBookId:0];
     //通过书籍ID获取书籍热门评论
     [self getBookDetailByBookId:1];
+    //通过书籍ID获取书籍社区帖子数量
+    [self getBookDetailByBookId:2];
+    //通过书籍ID获取你可能感兴趣书籍
+    [self getBookDetailByBookId:3];
     
     [self setTitle:@"书籍详情"];
     
@@ -142,11 +174,88 @@
     //设置开始阅读按钮圆角
     _startRead.layer.cornerRadius = 5;
     
+    //书籍的社区的点击事件
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(communityViewPress:)];
     _communityView.userInteractionEnabled = YES;
     [_communityView addGestureRecognizer:gesture];
+    
+    //你可能感兴趣的点击事件
+    UITapGestureRecognizer *gestrueView1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(interestPress:)];
+    _view1.userInteractionEnabled = YES;
+    _view1.tag = 101;
+    [_view1 addGestureRecognizer:gestrueView1];
+    UITapGestureRecognizer *gestrueView2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(interestPress:)];
+    _view2.userInteractionEnabled = YES;
+    _view2.tag = 102;
+    [_view2 addGestureRecognizer:gestrueView2];
+    UITapGestureRecognizer *gestrueView3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(interestPress:)];
+    _view3.userInteractionEnabled = YES;
+    _view3.tag = 103;
+    [_view3 addGestureRecognizer:gestrueView3];
+    UITapGestureRecognizer *gestrueView4 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(interestPress:)];
+    _view4.userInteractionEnabled = YES;
+    _view4.tag = 104;
+    [_view4 addGestureRecognizer:gestrueView4];
+    //更多
+    UITapGestureRecognizer *gestrueView5 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(interestPress:)];
+    _moreBtn_xq.userInteractionEnabled = YES;
+    _moreBtn_xq.tag = 105;
+    [_moreBtn_xq addGestureRecognizer:gestrueView5];
+    
+    //书籍作者 跳转到作者名下的书籍
+    UITapGestureRecognizer *gestrueView6 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(interestPress:)];
+    _bookAuthor.userInteractionEnabled = YES;
+    _bookAuthor.tag = 106;
+    [_bookAuthor addGestureRecognizer:gestrueView6];
 }
 
+//你可能感兴趣的点击事件函数
+-(void) interestPress:(UITapGestureRecognizer*) sender{
+    ZHBookDetailViewController *bookDetailVC = [[ZHBookDetailViewController alloc] init];
+    ZHInterestViewController *interestVC = [[ZHInterestViewController alloc] init];
+    //设置返回按钮文字，本界面设置，下一个界面显示
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
+    switch ([sender.view tag]) {
+        case 101:
+            bookDetailVC.bookId = _interestBookInfo[0][@"_id"];
+            [self.navigationController pushViewController:bookDetailVC animated:YES];
+            break;
+            
+        case 102:
+            bookDetailVC.bookId = _interestBookInfo[1][@"_id"];
+            [self.navigationController pushViewController:bookDetailVC animated:YES];
+            break;
+            
+        case 103:
+            bookDetailVC.bookId = _interestBookInfo[2][@"_id"];
+            [self.navigationController pushViewController:bookDetailVC animated:YES];
+            break;
+            
+        case 104:
+            bookDetailVC.bookId = _interestBookInfo[3][@"_id"];
+            [self.navigationController pushViewController:bookDetailVC animated:YES];
+            break;
+            
+        case 105:
+            //TODO:你可能感兴趣更多按钮点击事件
+            interestVC.interestBook = _interestBookInfo;
+            interestVC.title = @"你可能感兴趣";
+            [self.navigationController pushViewController:interestVC animated:YES];
+            break;
+            
+        case 106:
+            //TODO:作者名下的书籍
+            interestVC.author = _dicBookDeatail[@"author"];
+            interestVC.title = @"作者书单";
+            [self.navigationController pushViewController:interestVC animated:YES];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+//书籍的社区的点击事件函数
 -(void) communityViewPress:(UITapGestureRecognizer*) sender{
     ZHBookCommunityViewController *bookCommunityVC = [[ZHBookCommunityViewController alloc] init];
     bookCommunityVC.bookId = _bookId;
@@ -175,7 +284,7 @@
             NSLog(@"获取书籍详细信息失败：%@",error);
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         }];
-    }else{
+    }else if(i == 1){
         [manager GET:[NSString stringWithFormat:@"http://api.zhuishushenqi.com/post/review/by-book?book=%@&sort=comment-count&start=0&limit=2",_bookId] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             NSLog(@"获取书籍热门评论成功：%@",responseObject);
             [weakSelf.userHead1 sd_setImageWithURL:[NSURL URLWithString:[staticUrl stringByAppendingString:responseObject[@"reviews"][0][@"author"][@"avatar"]]]];
@@ -188,6 +297,7 @@
             weakSelf.likeNumber2.text = [NSString stringWithFormat:@"%d",[responseObject[@"reviews"][1][@"likeCount"] intValue]];
             
             int x = 0;
+            int y = 0;
             
             for (int i = 0; i < [responseObject[@"reviews"][0][@"rating"] intValue]; i++) {
                 x = 70 + (i * 15);
@@ -196,9 +306,9 @@
                 [self.hotCommView1 addSubview:imageView];
             }
             for (int j = 0; j < (5 - [responseObject[@"reviews"][0][@"rating"] intValue]); j++) {
-                x = x + ((j + 1) * 15);
+                y = x + ((j + 1) * 15);
                 UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Star_nil"]];
-                imageView.frame = CGRectMake(x, 50, 10, 10);
+                imageView.frame = CGRectMake(y, 50, 10, 10);
                 [self.hotCommView1 addSubview:imageView];
             }
             
@@ -209,14 +319,50 @@
                 [self.hotCommView2 addSubview:imageView];
             }
             for (int j = 0; j < (5 - [responseObject[@"reviews"][0][@"rating"] intValue]); j++) {
-                x = x + ((j + 1) * 15);
+                y = x + ((j + 1) * 15);
                 UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Star_nil"]];
-                imageView.frame = CGRectMake(x, 50, 10, 10);
+                imageView.frame = CGRectMake(y, 50, 10, 10);
                 [self.hotCommView2 addSubview:imageView];
             }
+            
+            YYLabel *label = [YYLabel new];
+            label.frame = CGRectMake(70, 60, WidthScale * 290, HeightScale * 50);
+            label.font = [UIFont systemFontOfSize:14];
+            label.attributedText = [self getAttributedStringWithString:[NSString stringWithFormat:@"%@",responseObject[@"reviews"][0][@"content"]] lineSpace:3];
+            label.numberOfLines = 2;
+            [weakSelf.hotCommView1 addSubview:label];
+            
+            YYLabel *label1 = [YYLabel new];
+            label1.frame = CGRectMake(70, 60, WidthScale * 290, HeightScale * 50);
+            label1.font = [UIFont systemFontOfSize:14];
+            label1.attributedText = [self getAttributedStringWithString:[NSString stringWithFormat:@"%@",responseObject[@"reviews"][1][@"content"]] lineSpace:3];
+            label1.numberOfLines = 2;
+            [weakSelf.hotCommView2 addSubview:label1];
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"获取书籍热门评论失败：%@",error);
+        }];
+    }else if(i == 2){
+        [manager GET:[NSString stringWithFormat:@"http://api.zhuishushenqi.com/post/by-book?book=%@&start=%d&limit=20",_bookId,1] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSLog(@"获取书籍社区帖子数量成功：%@",responseObject);
+            weakSelf.tzNumber.text = [NSString stringWithFormat:@"共有 %d 个帖子",[responseObject[@"total"] intValue]];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"获取书籍社区帖子数量失败：%@",error);
+        }];
+    }else if(i == 3){
+        [manager GET:[NSString stringWithFormat:@"https://novel.juhe.im/recommend/%@",_bookId] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSLog(@"获取你可能感兴趣成功：%@",responseObject);
+            weakSelf.interestBookInfo = (NSMutableArray*)responseObject[@"books"];
+            [weakSelf.imageView1 sd_setImageWithURL:[NSURL URLWithString:[staticUrl stringByAppendingString:responseObject[@"books"][0][@"cover"]]]];
+            [weakSelf.imageView2 sd_setImageWithURL:[NSURL URLWithString:[staticUrl stringByAppendingString:responseObject[@"books"][1][@"cover"]]]];
+            [weakSelf.imageView3 sd_setImageWithURL:[NSURL URLWithString:[staticUrl stringByAppendingString:responseObject[@"books"][2][@"cover"]]]];
+            [weakSelf.imageView4 sd_setImageWithURL:[NSURL URLWithString:[staticUrl stringByAppendingString:responseObject[@"books"][3][@"cover"]]]];
+            weakSelf.label11.text = responseObject[@"books"][0][@"title"];
+            weakSelf.label22.text = responseObject[@"books"][1][@"title"];
+            weakSelf.label33.text = responseObject[@"books"][2][@"title"];
+            weakSelf.label44.text = responseObject[@"books"][3][@"title"];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"获取你可能感兴趣失败：%@",error);
         }];
     }
     
@@ -241,8 +387,12 @@
     self.readerRetain.text = [NSString stringWithFormat:@"%.2f%%",[[NSString stringWithFormat:@"%@",_dicBookDeatail[@"retentionRatio"]] floatValue]];
     //设置书籍每天更新字数
     self.updateWordDay.text = [NSString stringWithFormat:@"%@",_dicBookDeatail[@"serializeWordCount"]];
-    
+    //设置书籍简介
     self.yyLabel.attributedText = [self getAttributedStringWithString:[NSString stringWithFormat:@"%@",_dicBookDeatail[@"longIntro"]] lineSpace:3];
+    //设置书籍版权
+    self.bookCopyright.text = [NSString stringWithFormat:@"版权：%@",_dicBookDeatail[@"copyright"]];
+    //设置书籍社区
+    _bookNameCommunity.text = [NSString stringWithFormat:@"%@的社区",_dicBookDeatail[@"title"]];
     
     //设置书籍标签
     NSArray *array = _dicBookDeatail[@"tags"];

@@ -59,6 +59,15 @@
     [self loadData];
     
     [ZHConstans shareConstants].addBook = ^{
+        self.localBookId = [NSKeyedUnarchiver unarchiveObjectWithFile:BookIdPath];
+        if (self.localBookId.count == 0) {
+            self.localBookId = [NSMutableArray array];
+            self.isnilView.hidden = NO;
+            self.BookListTablelView.hidden = YES;
+        }else{
+            self.isnilView.hidden = YES;
+            self.BookListTablelView.hidden = NO;
+        }
         [self loadData];
     };
 }
@@ -75,6 +84,9 @@
  如果本地没有保存书籍 那么显示没有书籍视图
  */
 - (void)initView{
+    self.BookListTablelView.dataSource = self;
+    self.BookListTablelView.delegate = self;
+    self.BookListTablelView.separatorColor = [UIColor colorWithHex:0xEFEFF4];
     //判断是否有书籍
     if (_localBookId.count == 0) {
         //不隐藏为空视图
@@ -91,9 +103,6 @@
         //没有书籍视图隐藏
         self.isnilView.hidden = YES;
         self.BookListTablelView.hidden = NO;
-        self.BookListTablelView.dataSource = self;
-        self.BookListTablelView.delegate = self;
-        self.BookListTablelView.separatorColor = [UIColor colorWithHex:0xEFEFF4];
         
         //TODO:读取缓存图片、书名、作者 通过书籍id+image、title、author方式获取
         for (NSString* _id in _localBookId) {
