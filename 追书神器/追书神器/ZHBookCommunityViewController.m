@@ -15,6 +15,7 @@
 #import "ZHDiscussTableViewCell.h"
 #import "MJRefreshNormalHeader.h"
 #import "MJRefreshAutoNormalFooter.h"
+#import "YYLabel.h"
 
 @interface ZHBookCommunityViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -28,6 +29,8 @@
 @property (nonatomic, assign) int i;
 //遮罩层视图
 @property (nonatomic, strong) UIView *waitView;
+//是讨论 还是书评
+@property (nonatomic, assign) BOOL isWhat;
 
 @end
 
@@ -36,7 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    _isWhat = YES;
     //页面展示之前进行等待提示框 和 网络请求
     self.waitView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     self.waitView.backgroundColor = [UIColor whiteColor];
@@ -74,14 +77,13 @@
 }
 - (IBAction)segPress:(id)sender {
     UISegmentedControl *seg = sender;
+    _i = 1;
     if(seg.selectedSegmentIndex){
         //书评
-        _tipLabel.hidden = NO;
-        _discussTableView.hidden = YES;
+        _isWhat = NO;
     }else{
         //讨论
-        _tipLabel.hidden = YES;
-        _discussTableView.hidden = NO;
+        _isWhat = YES;
         [self getNetWorkingData];
     }
 }
@@ -94,19 +96,55 @@
     
     __weak ZHBookCommunityViewController *weakSelf = self;
     
-    [manager GET:[NSString stringWithFormat:@"http://api.zhuishushenqi.com/post/by-book?book=%@&start=%d&limit=20",_bookId,_i] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"获取书籍讨论成功：%@",responseObject);
-        for(int i = 0;i < ((NSMutableArray*)responseObject[@"posts"]).count; i++){
-            [weakSelf.dicDiscuss addObject:((NSMutableArray*)responseObject[@"posts"])[i]];
-        }
-        [weakSelf.discussTableView reloadData];
-        [weakSelf.discussTableView.mj_footer endRefreshing];
-        [weakSelf.discussTableView.mj_header endRefreshing];
-        [weakSelf.waitView removeFromSuperview];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"获取书籍讨论失败：%@",error);
-    }];
+    if (_isWhat) {
+        [manager GET:[NSString stringWithFormat:@"http://api.zhuishushenqi.com/post/by-book?book=%@&start=%d&limit=20",_bookId,_i] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSLog(@"获取书籍讨论成功：%@",responseObject);
+            for(int i = 0;i < ((NSMutableArray*)responseObject[@"posts"]).count; i++){
+                [weakSelf.dicDiscuss addObject:((NSMutableArray*)responseObject[@"posts"])[i]];
+            }
+            [weakSelf.discussTableView reloadData];
+            [weakSelf.discussTableView.mj_footer endRefreshing];
+            [weakSelf.discussTableView.mj_header endRefreshing];
+            [weakSelf.waitView removeFromSuperview];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"获取书籍讨论失败：%@",error);
+        }];
+    }else{
+        [manager GET:[NSString stringWithFormat:@"http://api.zhuishushenqi.com/post/review/by-book?book=%@&sort=comment-count&start=%d&limit=20",_bookId,_i] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSLog(@"获取书籍热门评论成功：%@",responseObject);
+            
+            int x = 0;
+            int y = 0;
+            
+            //设置评级星星
+            for (int i = 0; i < [responseObject[@"reviews"][0][@"rating"] intValue]; i++) {
+                x = 70 + (i * 15);
+                UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Star"]];
+                imageView.frame = CGRectMake(x, 50, 10, 10);
+                [self.hotCommView1 addSubview:imageView];
+            }
+            for (int j = 0; j < (5 - [responseObject[@"reviews"][0][@"rating"] intValue]); j++) {
+                y = x + ((j + 1) * 15);
+                UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Star_nil"]];
+                imageView.frame = CGRectMake(y, 50, 10, 10);
+                [self.hotCommView1 addSubview:imageView];
+            }
+            
+            //设置评论内容
+            YYLabel *label = [YYLabel new];
+            label.frame = CGRectMake(70, 60, WidthScale * 290, 50);
+            label.font = [UIFont systemFontOfSize:14];
+            label.attributedText = [[ZHConstans shareConstants] getAttributedStringWithString:[NSString stringWithFormat:@"%@",responseObject[@"reviews"][0][@"content"]] lineSpace:3];
+            label.numberOfLines = 2;
+            [weakSelf.hotCommView1 addSubview:label];
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"获取书籍热门评论失败：%@",error);
+        }];
+    }
+    
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

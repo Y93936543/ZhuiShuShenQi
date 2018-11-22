@@ -100,4 +100,12 @@ extern NSString * const staticUrl;
  */
 - (void)showToast:(UIView *) sdkView showText:(NSString *)showText;
 
+/**
+ *  调整行间距
+ *
+ *  @param  string     文本
+ *  @param  lineSpace  行间距
+ */
+- (NSAttributedString *)getAttributedStringWithString:(NSString *)string lineSpace:(CGFloat)lineSpace;
+
 @end

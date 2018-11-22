@@ -328,14 +328,14 @@
             YYLabel *label = [YYLabel new];
             label.frame = CGRectMake(70, 60, WidthScale * 290, 50);
             label.font = [UIFont systemFontOfSize:14];
-            label.attributedText = [self getAttributedStringWithString:[NSString stringWithFormat:@"%@",responseObject[@"reviews"][0][@"content"]] lineSpace:3];
+            label.attributedText = [[ZHConstans shareConstants] getAttributedStringWithString:[NSString stringWithFormat:@"%@",responseObject[@"reviews"][0][@"content"]] lineSpace:3];
             label.numberOfLines = 2;
             [weakSelf.hotCommView1 addSubview:label];
             
             YYLabel *label1 = [YYLabel new];
             label1.frame = CGRectMake(70, 60, WidthScale * 290, 50);
             label1.font = [UIFont systemFontOfSize:14];
-            label1.attributedText = [self getAttributedStringWithString:[NSString stringWithFormat:@"%@",responseObject[@"reviews"][1][@"content"]] lineSpace:3];
+            label1.attributedText = [[ZHConstans shareConstants] getAttributedStringWithString:[NSString stringWithFormat:@"%@",responseObject[@"reviews"][1][@"content"]] lineSpace:3];
             label1.numberOfLines = 2;
             [weakSelf.hotCommView2 addSubview:label1];
             
@@ -388,7 +388,7 @@
     //设置书籍每天更新字数
     self.updateWordDay.text = [NSString stringWithFormat:@"%@",_dicBookDeatail[@"serializeWordCount"]];
     //设置书籍简介
-    self.yyLabel.attributedText = [self getAttributedStringWithString:[NSString stringWithFormat:@"%@",_dicBookDeatail[@"longIntro"]] lineSpace:3];
+    self.yyLabel.attributedText = [[ZHConstans shareConstants] getAttributedStringWithString:[NSString stringWithFormat:@"%@",_dicBookDeatail[@"longIntro"]] lineSpace:3];
     //设置书籍版权
     self.bookCopyright.text = [NSString stringWithFormat:@"版权：%@",_dicBookDeatail[@"copyright"]];
     //设置书籍社区
@@ -530,19 +530,6 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"获取书籍源失败：%@",error);
     }];
-}
-
-
-
-
-//调整行间距
--(NSAttributedString *)getAttributedStringWithString:(NSString *)string lineSpace:(CGFloat)lineSpace {
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.lineSpacing = lineSpace; // 调整行间距
-    NSRange range = NSMakeRange(0, [string length]);
-    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:range];
-    return attributedString;
 }
 
 @end

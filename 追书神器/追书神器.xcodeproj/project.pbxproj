@@ -52,6 +52,8 @@
 		8D299B4621A66D440013CABB /* ZHInterestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D299B4421A66D430013CABB /* ZHInterestViewController.xib */; };
 		8D299B4A21A66E850013CABB /* ZHInterestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D299B4821A66E850013CABB /* ZHInterestTableViewCell.m */; };
 		8D299B4B21A66E850013CABB /* ZHInterestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D299B4921A66E850013CABB /* ZHInterestTableViewCell.xib */; };
+		8D299B4F21A6B42B0013CABB /* ZHBookReviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D299B4D21A6B42B0013CABB /* ZHBookReviewTableViewCell.m */; };
+		8D299B5021A6B42B0013CABB /* ZHBookReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D299B4E21A6B42B0013CABB /* ZHBookReviewTableViewCell.xib */; };
 		8DB25567219AA8DB00261871 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DB25566219AA8DB00261871 /* Assets.xcassets */; };
 		8DB2556B219ABDDF00261871 /* ZHCoummunityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB25569219ABDDE00261871 /* ZHCoummunityTableViewCell.m */; };
 		8DB2556C219ABDDF00261871 /* ZHCoummunityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB2556A219ABDDE00261871 /* ZHCoummunityTableViewCell.xib */; };
@@ -168,6 +170,9 @@
 		8D299B4721A66E850013CABB /* ZHInterestTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHInterestTableViewCell.h; sourceTree = "<group>"; };
 		8D299B4821A66E850013CABB /* ZHInterestTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHInterestTableViewCell.m; sourceTree = "<group>"; };
 		8D299B4921A66E850013CABB /* ZHInterestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZHInterestTableViewCell.xib; sourceTree = "<group>"; };
+		8D299B4C21A6B42B0013CABB /* ZHBookReviewTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHBookReviewTableViewCell.h; sourceTree = "<group>"; };
+		8D299B4D21A6B42B0013CABB /* ZHBookReviewTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHBookReviewTableViewCell.m; sourceTree = "<group>"; };
+		8D299B4E21A6B42B0013CABB /* ZHBookReviewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZHBookReviewTableViewCell.xib; sourceTree = "<group>"; };
 		8DB25566219AA8DB00261871 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8DB25568219ABDDE00261871 /* ZHCoummunityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHCoummunityTableViewCell.h; sourceTree = "<group>"; };
 		8DB25569219ABDDE00261871 /* ZHCoummunityTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHCoummunityTableViewCell.m; sourceTree = "<group>"; };
@@ -444,6 +449,9 @@
 				8D299B4721A66E850013CABB /* ZHInterestTableViewCell.h */,
 				8D299B4821A66E850013CABB /* ZHInterestTableViewCell.m */,
 				8D299B4921A66E850013CABB /* ZHInterestTableViewCell.xib */,
+				8D299B4C21A6B42B0013CABB /* ZHBookReviewTableViewCell.h */,
+				8D299B4D21A6B42B0013CABB /* ZHBookReviewTableViewCell.m */,
+				8D299B4E21A6B42B0013CABB /* ZHBookReviewTableViewCell.xib */,
 			);
 			path = "追书神器";
 			sourceTree = "<group>";
@@ -519,6 +527,7 @@
 				8DFCEA4521902D3B0003F7D1 /* ZHFindViewController.xib in Resources */,
 				8DFCEA1921902CDC0003F7D1 /* LaunchScreen.storyboard in Resources */,
 				8DFCEA4321902D3B0003F7D1 /* ZHBookViewController.xib in Resources */,
+				8D299B5021A6B42B0013CABB /* ZHBookReviewTableViewCell.xib in Resources */,
 				8DFCEA1421902CDB0003F7D1 /* Main.storyboard in Resources */,
 				8DB25589219D744600261871 /* ZHBookDetailViewController.xib in Resources */,
 				8DB2556C219ABDDF00261871 /* ZHCoummunityTableViewCell.xib in Resources */,
@@ -575,6 +584,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D299B4F21A6B42B0013CABB /* ZHBookReviewTableViewCell.m in Sources */,
 				8D07E2D22193FF1700AC10F7 /* ZHCommunityViewController.m in Sources */,
 				8DB25573219BCAE800261871 /* LLSearchSuggestionVC.m in Sources */,
 				8D07E2C22192ED5600AC10F7 /* EDbObject.m in Sources */,
