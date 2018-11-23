@@ -109,6 +109,7 @@
     ZHBookCommunityViewController *bookCommunityVC = [[ZHBookCommunityViewController alloc] init];
     bookCommunityVC.bookId = [_bookCoummunityData objectAtIndex:indexPath.row];
     bookCommunityVC.hidesBottomBarWhenPushed = YES;
+    bookCommunityVC.isWhat = YES;
     bookCommunityVC.title = [[ZHConstans shareConstants] getBookInfo:[NSString stringWithFormat:@"%@+title",[_bookCoummunityData objectAtIndex:indexPath.row]]];
     //设置返回按钮文字，本界面设置，下一个界面显示
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];

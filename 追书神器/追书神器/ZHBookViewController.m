@@ -170,6 +170,7 @@
                 NSLog(@"获取书籍信息失败：%@",error);
                 //请求失败也发送请求成功信号量（+1）
                 dispatch_semaphore_signal(semaphore);
+                [[ZHConstans shareConstants] showToast:self.view showText:@"网络连接失败，请检查网络！"];
             }];
             //信号量减1，如果>0 则向下执行，否则等待
             dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);

@@ -176,6 +176,7 @@
     
     //书籍的社区的点击事件
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(communityViewPress:)];
+    _communityView.tag = 108;
     _communityView.userInteractionEnabled = YES;
     [_communityView addGestureRecognizer:gesture];
     
@@ -207,6 +208,12 @@
     _bookAuthor.userInteractionEnabled = YES;
     _bookAuthor.tag = 106;
     [_bookAuthor addGestureRecognizer:gestrueView6];
+    
+    //热门评论 更多 按钮
+    UITapGestureRecognizer *gestrueView7 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(communityViewPress:)];
+    _moreBtn.userInteractionEnabled = YES;
+    _moreBtn.tag = 107;
+    [_moreBtn addGestureRecognizer:gestrueView7];
 }
 
 //你可能感兴趣的点击事件函数
@@ -259,6 +266,12 @@
 -(void) communityViewPress:(UITapGestureRecognizer*) sender{
     ZHBookCommunityViewController *bookCommunityVC = [[ZHBookCommunityViewController alloc] init];
     bookCommunityVC.bookId = _bookId;
+    if (sender.view.tag == 108) {
+        bookCommunityVC.isWhat = YES;
+    }else{
+        bookCommunityVC.isWhat = NO;
+    }
+    
     bookCommunityVC.title = _dicBookDeatail[@"title"];
     //设置返回按钮文字，本界面设置，下一个界面显示
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];

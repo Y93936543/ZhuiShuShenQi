@@ -256,6 +256,8 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"获取搜索结果失败：%@",error);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [[ZHConstans shareConstants] showToast:self.view showText:@"网络连接失败，请检查网络！"];
     }];
 }
 

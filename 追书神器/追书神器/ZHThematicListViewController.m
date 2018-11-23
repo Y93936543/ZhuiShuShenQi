@@ -13,6 +13,7 @@
 #import "MBProgressHUD.h"
 #import "ZHConstans.h"
 #import "SDWebImage/UIImageView+WebCache.h"
+#import "ZHBookListDetailViewController.h"
 
 @interface ZHThematicListViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -62,6 +63,16 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 120;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    //TODO:cell的点击事件
+    ZHBookListDetailViewController *bookListDetailVC = [[ZHBookListDetailViewController alloc] init];
+    bookListDetailVC.title = @"书单详情";
+    bookListDetailVC.bookId = _arrayBookList[indexPath.row][@"_id"];
+    //设置返回按钮文字，本界面设置，下一个界面显示
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
+    [self.navigationController pushViewController:bookListDetailVC animated:YES];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -138,6 +149,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"获取主题书单失败：%@",error);
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        [[ZHConstans shareConstants] showToast:self.view showText:@"网络连接失败，请检查网络！"];
     }];
 }
 
