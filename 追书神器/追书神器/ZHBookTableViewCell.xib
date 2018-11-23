@@ -15,23 +15,31 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="88" id="KGk-i7-Jjw" customClass="ZHBookTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="327" height="88"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="327" height="87.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Book" translatesAutoresizingMaskIntoConstraints="NO" id="dEs-zr-hlg">
-                        <rect key="frame" x="10" y="10" width="55" height="70"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Book" translatesAutoresizingMaskIntoConstraints="NO" id="dEs-zr-hlg">
+                        <rect key="frame" x="10" y="11.5" width="55" height="70"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="Bb2-yd-IaL"/>
+                            <constraint firstAttribute="height" constant="70" id="Ky6-rI-bto"/>
+                            <constraint firstAttribute="width" constant="55" id="xnD-6C-s4U"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="yjE-uM-4xV"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="修罗武神" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOo-Mp-lWA">
-                        <rect key="frame" x="76" y="11" width="235" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="修罗武神" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOo-Mp-lWA">
+                        <rect key="frame" x="76" y="11.5" width="244" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="244" id="BDe-9I-euq"/>
+                            <constraint firstAttribute="height" constant="21" id="bT5-IZ-yaq"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="善良的蜜蜂" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7w-Hb-ZGr">
-                        <rect key="frame" x="76" y="38" width="235" height="14"/>
+                        <rect key="frame" x="76" y="38" width="209" height="14"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -44,7 +52,30 @@
                         <color key="textColor" red="0.72549019609999998" green="0.72549019609999998" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="更新" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjq-pu-92Q">
+                        <rect key="frame" x="291.5" y="38.5" width="18.5" height="11"/>
+                        <color key="backgroundColor" red="0.63529411764705879" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="18.5" id="E7p-W6-8Nl"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="18.5" id="QlV-5D-VOS"/>
+                            <constraint firstAttribute="height" constant="11" id="ZYg-Ge-VEn"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="11" id="dys-Ts-JLa"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="jOo-Mp-lWA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="3Li-Lt-R8s"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="bjq-pu-92Q" secondAttribute="trailing" constant="19" id="EMi-Fd-lr0"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="jOo-Mp-lWA" secondAttribute="trailing" constant="9" id="FBN-Qe-Pmh"/>
+                    <constraint firstItem="dEs-zr-hlg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Fch-V6-W8J"/>
+                    <constraint firstItem="bjq-pu-92Q" firstAttribute="top" secondItem="jOo-Mp-lWA" secondAttribute="bottom" constant="6" id="GcF-I0-Ve6"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="dEs-zr-hlg" secondAttribute="bottom" constant="7.5" id="K1V-pS-8n2"/>
+                    <constraint firstItem="jOo-Mp-lWA" firstAttribute="leading" secondItem="dEs-zr-hlg" secondAttribute="trailing" constant="11" id="bsH-qf-dqo"/>
+                    <constraint firstItem="dEs-zr-hlg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="s2F-Ay-Mwc"/>
+                </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
@@ -52,9 +83,10 @@
                 <outlet property="autorLabel" destination="p7w-Hb-ZGr" id="kN5-6e-vZC"/>
                 <outlet property="bookCoverImageView" destination="dEs-zr-hlg" id="Lrp-IS-giA"/>
                 <outlet property="bookTitleLabel" destination="jOo-Mp-lWA" id="vMi-LW-OSV"/>
+                <outlet property="isUpdate" destination="bjq-pu-92Q" id="IR1-yy-2hO"/>
                 <outlet property="updateMsgLabel" destination="PaE-m8-9Xk" id="Rfe-Rm-6gB"/>
             </connections>
-            <point key="canvasLocation" x="37.5" y="76"/>
+            <point key="canvasLocation" x="36" y="75.562218890554732"/>
         </tableViewCell>
     </objects>
     <resources>

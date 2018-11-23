@@ -77,7 +77,7 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最强反套路系统" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SD3-Ya-joL">
-                            <rect key="frame" x="85" y="15" width="108" height="18"/>
+                            <rect key="frame" x="85" y="15" width="275" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -488,6 +488,7 @@
                         <constraint firstItem="pNE-BM-6fk" firstAttribute="leading" secondItem="LZL-em-9OJ" secondAttribute="leading" constant="15" id="aWz-FF-r8R"/>
                         <constraint firstItem="pNE-BM-6fk" firstAttribute="top" secondItem="SD3-Ya-joL" secondAttribute="top" id="pam-KT-JT0"/>
                         <constraint firstItem="SD3-Ya-joL" firstAttribute="leading" secondItem="pNE-BM-6fk" secondAttribute="trailing" constant="10" id="uJH-RL-m2k"/>
+                        <constraint firstAttribute="trailing" secondItem="SD3-Ya-joL" secondAttribute="trailing" constant="15" id="uak-7i-Yh2"/>
                     </constraints>
                 </scrollView>
             </subviews>

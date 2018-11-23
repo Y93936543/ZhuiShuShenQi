@@ -17,5 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *autorLabel;
 //书籍更新信息
 @property (weak, nonatomic) IBOutlet UILabel *updateMsgLabel;
+//是否有更新
+@property (weak, nonatomic) IBOutlet UILabel *isUpdate;
 
 @end
