@@ -22,6 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *reviewTime;
 //点赞数量
 @property (weak, nonatomic) IBOutlet UILabel *likeNumber;
+//x星星评级视图
+@property (weak, nonatomic) IBOutlet UIView *starView;
+//评论内容视图
+@property (weak, nonatomic) IBOutlet UIView *commView;
 
 @end
 

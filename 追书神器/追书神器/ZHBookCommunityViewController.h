@@ -12,4 +12,7 @@
 
 @property (nonatomic, copy) NSString *bookId;
 
+//是讨论 还是书评
+@property (nonatomic, assign) BOOL isWhat;
+
 @end

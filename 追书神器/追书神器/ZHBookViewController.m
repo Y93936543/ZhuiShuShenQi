@@ -112,6 +112,7 @@
             bookDetail.title = [[ZHConstans shareConstants] getBookInfo:[NSString stringWithFormat:@"%@+title",_id]];
             bookDetail.author = [[ZHConstans shareConstants] getBookInfo:[NSString stringWithFormat:@"%@+author",_id]];
             bookDetail.author = [[ZHConstans shareConstants] getBookInfo:[NSString stringWithFormat:@"%@+lastChapter",_id]];
+//            [[ZHConstans shareConstants]removeBookInfo:[NSString stringWithFormat:@"%@+lastChapter",_id]];
             [self.bookArray arrayByAddingObject:bookDetail];
         }
         
@@ -170,6 +171,7 @@
                 NSLog(@"获取书籍信息失败：%@",error);
                 //请求失败也发送请求成功信号量（+1）
                 dispatch_semaphore_signal(semaphore);
+                [[ZHConstans shareConstants] showToast:self.view showText:@"网络连接失败，请检查网络！"];
             }];
             //信号量减1，如果>0 则向下执行，否则等待
             dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
@@ -249,6 +251,12 @@
     //设置更新信息
     cell.updateMsgLabel.text = [str stringByAppendingString:[self.bookArray objectAtIndex:indexPath.row].lastChapter];
 
+//    if (![[self.bookArray objectAtIndex:indexPath.row].lastChapter isEqualToString:[[ZHConstans shareConstants] getBookInfo:[NSString stringWithFormat:@"%@+lastChapter",_localBookId[indexPath.row]]]]) {
+//        cell.isUpdate.hidden = NO;
+//    }else{
+//        cell.isUpdate.hidden = YES;
+//    }
+    
     return cell;
 }
 

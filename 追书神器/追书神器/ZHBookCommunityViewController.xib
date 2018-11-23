@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ZHBookCommunityViewController">
             <connections>
                 <outlet property="discussTableView" destination="eHC-M8-xDG" id="CDb-qP-6CW"/>
+                <outlet property="segMented" destination="b2L-OI-8WV" id="ihX-ih-1lb"/>
                 <outlet property="tipLabel" destination="5Ih-K4-6V6" id="RHS-Ij-GDQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
