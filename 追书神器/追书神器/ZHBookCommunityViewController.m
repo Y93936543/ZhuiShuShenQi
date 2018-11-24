@@ -17,13 +17,12 @@
 #import "MJRefreshAutoNormalFooter.h"
 #import "YYLabel.h"
 #import "ZHBookReviewTableViewCell.h"
+#import "ZHBookCommunityDetailViewController.h"
 
 @interface ZHBookCommunityViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 //讨论列表
 @property (weak, nonatomic) IBOutlet UITableView *discussTableView;
-//书评暂无提示信息
-@property (weak, nonatomic) IBOutlet UILabel *tipLabel;
 //讨论 评论 数据
 @property (nonatomic, strong) NSMutableArray *dicDiscuss;
 
@@ -146,6 +145,13 @@
     }
     
     
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    ZHBookCommunityDetailViewController *bookCoommunityDetailVC = [[ZHBookCommunityDetailViewController alloc] init];
+    bookCoommunityDetailVC.dicCommunityDetail = [_dicDiscuss objectAtIndex:indexPath.row];
+    bookCoommunityDetailVC.isReview = _isWhat;
+    [self.navigationController pushViewController:bookCoommunityDetailVC animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

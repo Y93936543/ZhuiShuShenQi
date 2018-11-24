@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0270CB0821A92174001A3ED0 /* ZHBookCommunityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0270CB0721A92174001A3ED0 /* ZHBookCommunityDetailViewController.m */; };
+		0270CB0A21A92B3A001A3ED0 /* ZHBookCommunityDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0270CB0921A92B3A001A3ED0 /* ZHBookCommunityDetailViewController.xib */; };
 		8D07DFFA219147A500AC10F7 /* ZHChapterContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D07DFF9219147A400AC10F7 /* ZHChapterContent.m */; };
 		8D07E1B72192BE4E00AC10F7 /* ZHReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D07E1B62192BE4E00AC10F7 /* ZHReaderViewController.m */; };
 		8D07E1BA2192C65D00AC10F7 /* ZHReaderTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D07E1B92192C65D00AC10F7 /* ZHReaderTextViewController.m */; };
@@ -92,6 +94,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0270CB0621A92174001A3ED0 /* ZHBookCommunityDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHBookCommunityDetailViewController.h; sourceTree = "<group>"; };
+		0270CB0721A92174001A3ED0 /* ZHBookCommunityDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHBookCommunityDetailViewController.m; sourceTree = "<group>"; };
+		0270CB0921A92B3A001A3ED0 /* ZHBookCommunityDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZHBookCommunityDetailViewController.xib; sourceTree = "<group>"; };
 		14EA73B3EE72EC3371E838F8 /* Pods-追书神器.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-追书神器.release.xcconfig"; path = "Pods/Target Support Files/Pods-追书神器/Pods-追书神器.release.xcconfig"; sourceTree = "<group>"; };
 		44A9FAA89200C83A8AD40FD2 /* libPods-追书神器.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-追书神器.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AE1AEA366B24CC8F385609D /* Pods-追书神器.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-追书神器.debug.xcconfig"; path = "Pods/Target Support Files/Pods-追书神器/Pods-追书神器.debug.xcconfig"; sourceTree = "<group>"; };
@@ -468,6 +473,9 @@
 				8D13466021A7D93A00373C98 /* ZHBookListDetailTableViewCell.h */,
 				8D13466121A7D93A00373C98 /* ZHBookListDetailTableViewCell.m */,
 				8D13466221A7D93A00373C98 /* ZHBookListDetailTableViewCell.xib */,
+				0270CB0621A92174001A3ED0 /* ZHBookCommunityDetailViewController.h */,
+				0270CB0721A92174001A3ED0 /* ZHBookCommunityDetailViewController.m */,
+				0270CB0921A92B3A001A3ED0 /* ZHBookCommunityDetailViewController.xib */,
 			);
 			path = "追书神器";
 			sourceTree = "<group>";
@@ -532,6 +540,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0270CB0A21A92B3A001A3ED0 /* ZHBookCommunityDetailViewController.xib in Resources */,
 				8D299B3C21A27C840013CABB /* ZHThematicListViewController.xib in Resources */,
 				8D299B4B21A66E850013CABB /* ZHInterestTableViewCell.xib in Resources */,
 				8D13465F21A7BEA900373C98 /* ZHBookListDetailViewController.xib in Resources */,
@@ -620,6 +629,7 @@
 				8DFCEA1C21902CDC0003F7D1 /* main.m in Sources */,
 				8DFCEA3D21902D3B0003F7D1 /* ZHBookDetail.m in Sources */,
 				8D07E1C32192DDD000AC10F7 /* ZHReaderPager.m in Sources */,
+				0270CB0821A92174001A3ED0 /* ZHBookCommunityDetailViewController.m in Sources */,
 				8D07E2D821952EB500AC10F7 /* ZHChapterModel.m in Sources */,
 				8D07E28E2192E9B800AC10F7 /* TReaderManager.m in Sources */,
 				8D299B3B21A27C840013CABB /* ZHThematicListViewController.m in Sources */,
